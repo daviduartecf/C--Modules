@@ -1,10 +1,10 @@
-NAME	= Harl
+NAME	= Fixed
 
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 
-SRC	= Harl.cpp main.cpp
+SRC	= Fixed.cpp main.cpp
 
 OBJS = $(SRC_FILES:.c=.o)
 
@@ -32,7 +32,7 @@ $(SRC_DIR)%.o: $(SRC_DIR)%.c
 $(NAME): $(OBJS)
 	@ echo "Compilating ${YELLOW}$(NAME) ${CLR_RMV}..."
 	@ $(CC) $(CFLAGS) $(SRC) -o $(NAME)
-	@ echo "${R_GREEN}${GREEN}Harl ${R_GREEN} ${GREEN}"
+	@ echo "${R_GREEN}${GREEN}Fixed ${R_GREEN} ${GREEN}"
 	@ echo "${R_GREEN}by ${GREEN}daduarte ${R_GREEN} ${GREEN}"
 	@ echo "${CLR_RMV}"
 
