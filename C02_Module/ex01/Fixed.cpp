@@ -1,15 +1,29 @@
 #include "Fixed.hpp"
 
-const int Fixed::_fract_bits = 8;
+const int Fixed::_fractionalBits = 8;
+
+std::ostream&   operator<<(std::ostream& os, const Fixed& fixed)
+{
+    os << fixed.toFloat();
+    return os;
+}
+
+float   Fixed::toFloat(void) const {
+    return (float)(_value / (float)(1 << _fractionalBits));
+}
+
+int     Fixed::toInt(void) const {
+    return (_value >> _fractionalBits);
+}
 
 Fixed::Fixed(int const num) {
-    std::cout << "Fixed Int constructor called" << std::endl;
-    _value = num << _fract_bits;
+    std::cout << "Int constructor called" << std::endl;
+    _value = num << _fractionalBits;
 }
 
 Fixed::Fixed(float const num) {
-    std::cout << "Fixed Float constructor called" << std::endl;
-    _value = num * (1 << _fract_bits);
+    std::cout << "Float constructor called" << std::endl;
+    _value = roundf(num * (1 << _fractionalBits));
 }
 
 Fixed::Fixed(): _value(0) {
@@ -33,7 +47,6 @@ Fixed& Fixed::operator = (const Fixed& other) {
 }
 
 int  Fixed::getRawBits(void) const {
-    std::cout << "getRawBits function called" << std::endl;
     return _value;
 }
 

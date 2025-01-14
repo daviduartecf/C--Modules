@@ -2,7 +2,7 @@
 #define FIXED_CPP
 
 #include <iostream>
-#include <string>
+#include <cmath>
 
 class Fixed
 {
@@ -18,9 +18,13 @@ class Fixed
         //New
         Fixed(int const num);
         Fixed(float const num);
+        float   toFloat(void) const;
+        int     toInt(void) const;
     private:
         int _value;
         static const int _fractionalBits;
 };
+
+std::ostream&   operator<<(std::ostream& os, const Fixed& fixed);
 
 #endif
