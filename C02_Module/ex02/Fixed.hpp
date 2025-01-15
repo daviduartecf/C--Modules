@@ -9,8 +9,9 @@ class Fixed
     public:
         //Orthodox Canonical Form
         Fixed();
-        Fixed(const Fixed& other);
         ~Fixed();
+        Fixed(const Fixed& other);
+        Fixed& operator = (const Fixed& other);
         //Setters/Getters
         int  getRawBits(void) const;
         void  setRawBits(int const raw);
@@ -21,7 +22,6 @@ class Fixed
         float   toFloat(void) const;
         int     toInt(void) const;
         //Operators
-        Fixed& operator = (const Fixed& other);
         bool operator == (const Fixed& other);
         bool operator != (const Fixed& other);
         bool operator < (const Fixed& other);
