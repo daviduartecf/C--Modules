@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daduarte <daduarte@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:38:25 by daduarte          #+#    #+#             */
-/*   Updated: 2024/12/13 23:26:08 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:05:34 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include <vector>
-#include <algorithm>
-#include <functional>
 #include <iostream>
 #include <iomanip>
+#include <ctime>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -51,6 +49,7 @@ int	Account::checkAmount(void) const {
 }
 
 Account::~Account() {
+	Account::_displayTimestamp();
     std::cout << "index:" << _accountIndex << ";";
     std::cout << "amount:" << _amount << ";";
     std::cout << "closed" << std::endl;
@@ -58,12 +57,14 @@ Account::~Account() {
 }
 
 Account::Account() {
+	Account::_displayTimestamp();
     _nbAccounts += 1;
     _accountIndex = _nbAccounts - 1;
     std::cout << "Created account with: 0 " << std::endl;
 }
 
 Account::Account(int initial_deposit) : _amount(initial_deposit) {
+	Account::_displayTimestamp();
     Account::_totalAmount += _amount;
     Account::_nbAccounts += 1;
     _nbWithdrawals = 0;
@@ -74,6 +75,7 @@ Account::Account(int initial_deposit) : _amount(initial_deposit) {
 }
 
 void	Account::displayStatus( void ) const {
+	Account::_displayTimestamp();
     std::cout << "index:" << _accountIndex << ";";
     std::cout << "amount:" << _amount << ";";
     std::cout << "deposits:" <<  _nbDeposits << ";";
@@ -82,13 +84,16 @@ void	Account::displayStatus( void ) const {
 
 void	Account::_displayTimestamp(void)
 {
-	time_t	now;
+	std::time_t	now;
+	char buffer[20];
 
-	now = time(NULL);
-	std::cout << std::put_time(localtime(&now), "[%Y%m%d_%H%M%S] ");
+	now = std::time(NULL);
+	std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S] ", std::localtime(&now));
+	std::cout << buffer;
 }
 
 void    Account::makeDeposit(int deposit) {
+	Account::_displayTimestamp();
     if (deposit > 0)
     {
         _nbDeposits ++;
@@ -104,6 +109,7 @@ void    Account::makeDeposit(int deposit) {
 }
 
 bool    Account::makeWithdrawal(int withdrawal) {
+	Account::_displayTimestamp();
     if (withdrawal > 0)
     {
         std::cout << "index:" << _accountIndex << ";";
@@ -127,7 +133,7 @@ bool    Account::makeWithdrawal(int withdrawal) {
     return (true);
 }
 
-int		main( void ) {
+/* int		main( void ) {
 
 	typedef std::vector<Account::t>							  accounts_t;
 	typedef std::vector<int>								  ints_t;
@@ -176,3 +182,4 @@ int		main( void ) {
 
 	return 0;
 }
+ */

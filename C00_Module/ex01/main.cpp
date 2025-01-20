@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daduarte <daduarte@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:18:02 by daduarte          #+#    #+#             */
-/*   Updated: 2024/12/13 17:08:58 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:49:04 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <csignal>
+#include <cstdlib>
 
 void handleSigint(int signum)
 {
@@ -71,7 +72,8 @@ int	main(void)
 		if (option == "ADD")
 		{
 			phoneBook.updateContacts();
-			phoneBook.addContact();
+			if (phoneBook.addContact() == false)
+				return (1);
 		}
 		else if (option == "SEARCH")
 		{
@@ -86,7 +88,6 @@ int	main(void)
 			std::cout << "Invalid input. Enter one of te following options:" << RESET << std::endl;
 		wait_for_enter();
 	}
-
 	return (0);
 }
 

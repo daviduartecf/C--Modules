@@ -1,10 +1,10 @@
-NAME	= phoneBook
+NAME	= account
 
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 RM			= rm -rf
 
-SRC	= phoneBook.cpp contact.cpp main.cpp
+SRC	= Account.cpp tests.cpp
 
 OBJS = $(SRC_FILES:.c=.o)
 
@@ -32,7 +32,7 @@ $(SRC_DIR)%.o: $(SRC_DIR)%.c
 $(NAME): $(OBJS)
 	@ echo "Compilating ${YELLOW}$(NAME) ${CLR_RMV}..."
 	@ $(CC) $(CFLAGS) $(SRC) -o $(NAME)
-	@ echo "${R_GREEN}${GREEN}Phone Book ${R_GREEN} ${GREEN}"
+	@ echo "${R_GREEN}${GREEN}Account ${R_GREEN} ${GREEN}"
 	@ echo "${R_GREEN}by ${GREEN}daduarte ${R_GREEN} ${GREEN}"
 	@ echo "${CLR_RMV}"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daduarte <daduarte@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:45:56 by daduarte          #+#    #+#             */
-/*   Updated: 2024/12/14 23:22:31 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:43:17 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ class PhoneBook
 		void displayContacts() const;
 		void search() const;
 		bool isFull() const;
-		void addContact();
+		bool addContact();
 		void updateContacts();
 	private:
 		static const int	maxContacts = 8;
 		Contact _contacts[maxContacts];
 		int	_contactCount;
-		int	_index;
 };
 
 #endif
