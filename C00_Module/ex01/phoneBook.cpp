@@ -6,7 +6,7 @@
 /*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:46:04 by daduarte          #+#    #+#             */
-/*   Updated: 2025/01/20 15:43:07 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:30:30 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void PhoneBook::search() const
 {
 	int index;
 
+	if (this->_contactCount == 0)
+		return;
 	std::cout << BLUE << "Enter the index:" << RESET << std::endl;
 	std::cin >> index;
 	if (std::cin.fail()) {
