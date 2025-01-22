@@ -1,14 +1,14 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(): ClapTrap() {
-    std::cout << "Default ScavTrap constructor called." << std::endl;
+    std::cout << "ScavTrap Default constructor called." << std::endl;
     _hitPoints = 100;
     _energyPoints = 50;
     _attackDmg = 20;
     _guard_state = false;
 }
 ScavTrap::~ScavTrap() {
-    std::cout << "Default ScavTrap destructor called." << std::endl;
+    std::cout << "ScavTrap destructor called." << std::endl;
 }
 
 ScavTrap& ScavTrap::operator =(const ScavTrap& other) {
@@ -24,7 +24,7 @@ ScavTrap::ScavTrap(const ScavTrap& other): ClapTrap(other) {
 }
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
-    std::cout << "Name ScavTrap constructor called." << std::endl;
+    std::cout << "ScavTrap Name constructor called." << std::endl;
     _name = name;
     _hitPoints = 100;
     _energyPoints = 50;

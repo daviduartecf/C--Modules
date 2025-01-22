@@ -25,8 +25,15 @@ int main(int argc, char *argv[]) {
     }
 
     std::string line;
-    while (std::getline(inputFile, line))
+    size_t pos;
+    while (std::getline(inputFile, line)) {
+        while ((pos = line.find(input.getS1())) != std::string::npos) {
+            line.erase(pos, input.getS1().length());
+            line.insert(pos, input.getS2());
+        }
+        std::cout << line << std::endl;
         outputFile << line << std::endl;
+    }
 
     inputFile.close();
     outputFile.close();
