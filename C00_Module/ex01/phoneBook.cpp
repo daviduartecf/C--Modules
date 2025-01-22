@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   phoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daduarte <daduarte@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:46:04 by daduarte          #+#    #+#             */
-/*   Updated: 2024/12/14 23:22:44 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:30:30 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "phoneBook.hpp"
 #include "contact.hpp"
 
-PhoneBook::Phonebook(): _contactCount(0), _index(0) {}
+PhoneBook::PhoneBook(): _contactCount(0) {}
 
 PhoneBook::~PhoneBook() {}
 
@@ -78,7 +78,7 @@ void PhoneBook::updateContacts()
 	}
 }
 
-void PhoneBook::addContact()
+bool PhoneBook::addContact()
 {
 	std::string first_name;
 	std::string last_name;
@@ -88,28 +88,31 @@ void PhoneBook::addContact()
 
 	first_name = getUserInput("Enter first name: ");
 	if (first_name.empty())
-		return;
+		return false;
 	last_name = getUserInput("Enter last name: ");
 	if (last_name.empty())
-		return;
+		return false;
 	nick_name = getUserInput("Enter nickname: ");
 	if	(nick_name.empty())
-		return;
+		return false;
 	phone_number = getUserInput("Enter phone number: ");
 	if	(phone_number.empty())
-		return;
+		return false;
 	darkest_secret = getUserInput("Enter darkest secret: ");
 	if	(darkest_secret.empty())
-		return;
+		return false;
 	this->_contacts[0] = Contact(first_name, last_name, nick_name, phone_number, darkest_secret, 1);
 	std::cout << std::endl << GREEN << "Contact " << first_name << " added!" << RESET << std::endl;
 	_contactCount++;
+	return true;
 }
 
 void PhoneBook::search() const
 {
 	int index;
-	
+
+	if (this->_contactCount == 0)
+		return;
 	std::cout << BLUE << "Enter the index:" << RESET << std::endl;
 	std::cin >> index;
 	if (std::cin.fail()) {
