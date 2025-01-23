@@ -1,7 +1,7 @@
 NAME	= unnecessary_violence
 
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 RM			= rm -rf
 
 SRC	= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp

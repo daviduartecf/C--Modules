@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daduarte <daduarte@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: daduarte <daduarte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:48:01 by daduarte          #+#    #+#             */
-/*   Updated: 2024/12/13 19:23:51 by daduarte         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:39:20 by daduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void Contact::full_display() const {
 
 std::string Contact::truncateString(const std::string& str) const {
     if (str.length() > 10) {
-        return str.substr(0, 10 - 1) + ".";
+        return str.substr(0, 9) + ".";
     }
     return str;
 }

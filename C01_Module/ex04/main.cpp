@@ -10,15 +10,15 @@ int main(int argc, char *argv[]) {
         return (1);
     }
     Input input(argv[1], argv[2], argv[3]);
-    std::cout << "Input: " << input.getFilename() << ", " << input.getS1() << ", " << input.getS2() << std::endl;
 
-    std::ifstream inputFile(input.getFilename());
+    std::ifstream inputFile(input.getFilename().c_str());
     if (!inputFile.is_open()) {
         std::cerr << "Error: Could not open input file." << std::endl;
         return 1;
     }
 
-    std::ofstream outputFile(input.getFilename() + ".replace");
+	std::string replaceFile = input.getFilename() + ".replace";
+    std::ofstream outputFile(replaceFile.c_str());
     if (!outputFile.is_open()) {
         std::cerr << "Error: Could not create output file." << std::endl;
         return 1;
@@ -31,7 +31,6 @@ int main(int argc, char *argv[]) {
             line.erase(pos, input.getS1().length());
             line.insert(pos, input.getS2());
         }
-        std::cout << line << std::endl;
         outputFile << line << std::endl;
     }
 

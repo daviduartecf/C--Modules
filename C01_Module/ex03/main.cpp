@@ -1,19 +1,6 @@
 #include "Weapon.hpp"
-#include "HumanA.hpp"
 #include "HumanB.hpp"
-
-// int main(void) {
-//     Weapon gun("pistol");
-//     std::cout << "type: " << gun.getType() << std::endl;
-//     gun.setType("machine gun");
-//     std::cout << "type: " << gun.getType() << std::endl;
-
-//     HumanA humanA("Fernando", gun);
-//     HumanB humanB("Ruiquelme");
-
-//     humanA.attack();
-//     humanB.attack();
-// }
+#include "HumanA.hpp"
 
 int main()
 {
@@ -31,6 +18,25 @@ int main()
     jim.attack();
     club.setType("some other type of club");
     jim.attack();
+    }
+    {
+    std::cout << "-----CREATION OF WEAPON-----" << std::endl;
+    Weapon club = Weapon("crude spiked club");
+    std::cout << "-----constructor oh humanB and humanA-----" << std::endl;
+    HumanB toze("toze");
+    HumanA berto("berto", club);
+    std::cout << "-----ATTACK WITHOUT WEAPON-----" << std::endl;
+    toze.attack();
+    std::cout << "-----SET WEAPON-----" << std::endl;
+    toze.setWeapon(club);
+    std::cout << "-----ATTACK WITH WEAPON-----" << std::endl;
+    toze.attack();
+    berto.attack();
+    std::cout << "-----CHANGE WEAPON TYPE-----" << std::endl;
+    club.setType("some other type of club");
+    std::cout << "-----ATTACK WITH WEAPON-----" << std::endl;
+    toze.attack();
+    berto.attack();
     }
     return 0;
 }
