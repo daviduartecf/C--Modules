@@ -1,5 +1,5 @@
 #ifndef FIXED_HPP
-#define FIXED_CPP
+#define FIXED_HPP
 
 #include <iostream>
 #include <string>

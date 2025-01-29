@@ -1,5 +1,5 @@
 #ifndef FIXED_HPP
-#define FIXED_CPP
+#define FIXED_HPP
 
 #include <iostream>
 #include <cmath>
@@ -29,10 +29,10 @@ class Fixed
         bool operator >= (const Fixed& other);
         bool operator <= (const Fixed& other);
         //Arithmetic operators
-        float operator * (const Fixed& other);
-        float operator / (const Fixed& other);
-        float operator + (const Fixed& other);
-        float operator - (const Fixed& other);
+        Fixed operator * (const Fixed& other);
+        Fixed operator / (const Fixed& other);
+        Fixed operator + (const Fixed& other);
+        Fixed operator - (const Fixed& other);
         //Increment/Decrement operators
         Fixed& operator --(void);
         Fixed& operator ++(void);

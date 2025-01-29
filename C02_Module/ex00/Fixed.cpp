@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-const int Fixed::_fract_bits = 8;
+const int Fixed::_fractionalBits = 8;
 
 Fixed::Fixed(): _value(0) {
     std::cout << "Default constructor called" << std::endl;

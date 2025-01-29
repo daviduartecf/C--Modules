@@ -8,14 +8,14 @@ std::ostream&   operator<<(std::ostream& os, const Fixed& fixed)
     return os;
 }
 
-//To store a int as a fixed-point just scale up 2^fractionalbits 
+//To store a int as a fixed-point just scale up 2^fractionalbits
 //shift left
 Fixed::Fixed(int const num) {
     std::cout << "Int constructor called" << std::endl;
     _value = num << _fractionalBits;
 }
 
-//To store a float as a fixed-point we cant bitshift because 
+//To store a float as a fixed-point we cant bitshift because
 //floating-point nums are not integers
 //BIT SHIFT only work on integers
 //So we multiply by 2^fractionalbits
@@ -25,7 +25,7 @@ Fixed::Fixed(float const num) {
 }
 
 float   Fixed::toFloat(void) const {
-    return (float)(_value / (float)(1 << _fractionalBits));
+    return static_cast<float>(_value / static_cast<float>(1 << _fractionalBits));
 }
 
 int     Fixed::toInt(void) const {

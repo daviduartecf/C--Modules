@@ -54,44 +54,56 @@ Fixed& Fixed::operator --(void) {
     return *this;
 }
 
-float Fixed::operator * (const Fixed& other) {
-    return (this->toFloat() * other.toFloat());
+Fixed Fixed::operator * (const Fixed& other) {
+    Fixed result;
+
+    result._value = (this->_value * other._value) >> _fractionalBits;
+    return result;
 }
 
-float Fixed::operator / (const Fixed& other) {
-    return (this->toFloat() / other.toFloat());
+Fixed Fixed::operator / (const Fixed& other) {
+    Fixed result;
+
+    result._value = (this->_value << _fractionalBits) / other._value;
+    return result;
 }
 
-float Fixed::operator + (const Fixed& other) {
-    return (this->toFloat() + other.toFloat());
+Fixed Fixed::operator + (const Fixed& other) {
+    Fixed result;
+
+    result.setRawBits(_value + other._value);
+    return result;
 }
 
-float Fixed::operator - (const Fixed& other) {
-    return (this->toFloat() - other.toFloat());
+Fixed Fixed::operator - (const Fixed& other) {
+    Fixed result;
+
+    result.setRawBits(_value - other._value);
+    return result;
 }
 
 bool Fixed::operator == (const Fixed& other) {
-    return (this->toFloat() == other.toFloat());
+    return (this->getRawBits() == other.getRawBits());
 }
 
 bool Fixed::operator != (const Fixed& other) {
-    return (this->toFloat() != other.toFloat());
+    return (this->getRawBits() != other.getRawBits());
 }
 
 bool Fixed::operator <= (const Fixed& other) {
-    return (this->toFloat() <= other.toFloat());
+    return (this->getRawBits() <= other.getRawBits());
 }
 
 bool Fixed::operator >= (const Fixed& other) {
-    return (this->toFloat() >= other.toFloat());
+    return (this->getRawBits() >= other.getRawBits());
 }
 
 bool Fixed::operator < (const Fixed& other) {
-    return (this->toFloat() < other.toFloat());
+    return (this->getRawBits() < other.getRawBits());
 }
 
 bool Fixed::operator > (const Fixed& other) {
-    return (this->toFloat() > other.toFloat());
+    return (this->getRawBits() > other.getRawBits());
 }
 
 std::ostream&   operator<<(std::ostream& os, const Fixed& fixed)
@@ -101,7 +113,7 @@ std::ostream&   operator<<(std::ostream& os, const Fixed& fixed)
 }
 
 float   Fixed::toFloat(void) const {
-    return (float)(_value / (float)(1 << _fractionalBits));
+    return static_cast<float>(_value / static_cast<float>(1 << _fractionalBits));
 }
 
 int     Fixed::toInt(void) const {
