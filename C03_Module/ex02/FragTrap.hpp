@@ -17,8 +17,6 @@ class FragTrap: public ClapTrap
         FragTrap(std::string name);
         //Public methods
         void highFivesGuys(void);
-    private:
-        bool _guard_state;
 };
 
 #endif

@@ -1,7 +1,7 @@
 NAME	= FragTrap
 
 CC			= c++
-CFragS		= -Wall -Wextra -Werror
+CFragS		= -Wall -Wextra -Werror -std=c++98
 RM			= rm -rf
 
 SRC	= ClapTrap.cpp FragTrap.cpp ScavTrap.cpp main.cpp

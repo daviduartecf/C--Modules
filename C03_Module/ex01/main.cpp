@@ -2,19 +2,15 @@
 #include "ScavTrap.hpp"
 
 int main() {
-    std::cout << "Creating a ScavTrap named 'Guardian'" << std::endl;
-    ScavTrap scav1("Guardian"); // Call name constructor
+    ScavTrap scav1("Guardian");
+    ScavTrap scav2;
+    scav2 = scav1;
+    ScavTrap scav3(scav1);
 
-    std::cout << "\nCreating a ScavTrap named 'Sentinel' via default constructor" << std::endl;
-    ScavTrap scav2; // Call default constructor
-    scav2 = scav1;  // Call assignment operator
-
-    std::cout << "\nCopy constructing 'Defender' from 'Guardian'" << std::endl;
-    ScavTrap scav3(scav1); // Call copy constructor
-
-    std::cout << "\nUsing ScavTrap 'Guardian' to demonstrate functionality" << std::endl;
-    scav1.guardGate(); // Call guardGate function
-
-    std::cout << "\nDemonstrating destruction order" << std::endl;
+	scav3.attack("olo");
+    for (int i = 0; i < 50; i++)
+        scav3.attack("clone");
+    scav1.guardGate();
+	scav1.guardGate();
     return 0;
 }

@@ -32,6 +32,17 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
     _guard_state = false;
 }
 
+void    ScavTrap::attack(const std::string& target) {
+    if (this->_energyPoints > 0 && this->_hitPoints > 0) {
+        std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDmg << " points of damage!" << std::endl;
+        this->_energyPoints--;
+    }
+    else if (this->_energyPoints == 0)
+        std::cout << "ScavTrap " << this->_name << " doesn't have energy points!" << std::endl;
+    else
+        std::cout << "ScavTrap " << this->_name << " can't attack, it is dead!" << std::endl;
+}
+
 void    ScavTrap::guardGate(void) {
     if (_guard_state == false) {
         std::cout << "ScavTrap " << _name << "is now in guard keeper mode." << std::endl;

@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "ClapTrap Default constructor called" << std::endl;
     _name = "Default";
     _hitPoints = 10;
     _energyPoints = 10;
@@ -9,26 +9,26 @@ ClapTrap::ClapTrap() {
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "Default destructor called" << std::endl;
+    std::cout << "ClapTrap Default destructor called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator =(const ClapTrap& other) {
     if (this != &other) {
         _name = other._name;
         _hitPoints = other._hitPoints;
-        _energyPoints = other._hitPoints;
-        _attackDmg = other._hitPoints;
+        _energyPoints = other._energyPoints;
+        _attackDmg = other._attackDmg;
     }
     return *this;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-    std::cout << "Copy constructor called" << std::endl;
+    std::cout << "ClapTrap Copy constructor called" << std::endl;
     *this = other;
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name) {
-    std::cout << "Name constructor called" << std::endl;
+    std::cout << "ClapTrap Name constructor called" << std::endl;
     _hitPoints = 10;
     _energyPoints = 10;
     _attackDmg = 0;
