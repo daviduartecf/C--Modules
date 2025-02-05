@@ -4,7 +4,7 @@ CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 RM			= rm -rf
 
-SRC	= WrongAnimal.cpp WrongCat.cpp main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRC	= WrongAnimal.cpp WrongCat.cpp main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 
 OBJS = $(SRC_FILES:.c=.o)
 
