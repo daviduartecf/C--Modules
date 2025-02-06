@@ -3,7 +3,7 @@
 WrongAnimal::WrongAnimal()
 {
 	std::cout << "Wrong Animal was constructed\n";
-	this->type = "animal";
+	this->type = "";
 }
 
 WrongAnimal::~WrongAnimal()
@@ -25,7 +25,7 @@ WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs)
 
 void WrongAnimal::makeSound() const
 {
-	std::cout << "... generic wrong animal sound ...\n";
+	std::cout << "... wrong animal sound ...\n";
 }
 
 std::string WrongAnimal::getType( void ) const

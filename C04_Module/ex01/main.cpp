@@ -13,9 +13,9 @@ int main()
     const Dog* j = new Dog();
     const Animal* i = new Cat();
 
+	std::cout << "===== Confirm deep copy =====" << std::endl;
     j->brainGetter()->ideaSetter("This is one stupid idea", 0);
     std::cout << BLUE << j->brainGetter()->ideaGetter(0) << RESET << std::endl;
-
     const Dog* k = new Dog(*j);
     std::cout << BLUE << k->brainGetter()->ideaGetter(0) << RESET << std::endl;
 

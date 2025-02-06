@@ -20,7 +20,7 @@ Animal& Animal::operator = (const Animal& other) {
 }
 
 Animal::Animal(const Animal& other) {
-    std::cout << GREEN "Copy constructor called" RESET << std::endl;
+    std::cout << GREEN "Animal copy constructor called" RESET << std::endl;
     *this = other;
 }
 

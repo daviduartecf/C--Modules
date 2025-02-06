@@ -11,24 +11,24 @@ WrongAnimal::~WrongAnimal()
 	std::cout << "Wrong Animal was destroyed\n";
 }
 
-WrongAnimal::WrongAnimal(WrongAnimal & ref)
+WrongAnimal::WrongAnimal(WrongAnimal& other)
 {
-	this->type = ref.type;
+	this->type = other.type;
 	std::cout << "Wrong Animal was constructed from a copy\n";
 }
 
-WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs)
+WrongAnimal & WrongAnimal::operator=(WrongAnimal const& other)
 {
-	this->type = rhs.type;
+	this->type = other.type;
 	return (*this);
 }
 
 void WrongAnimal::makeSound() const
 {
-	std::cout << "... generic wrong animal sound ...\n";
+	std::cout << "... wrong animal sound ...\n";
 }
 
-std::string WrongAnimal::getType( void ) const
+std::string WrongAnimal::getType(void) const
 {
 	return (this->type);
 }

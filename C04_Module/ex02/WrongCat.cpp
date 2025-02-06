@@ -14,7 +14,7 @@ WrongCat::~WrongCat()
 WrongCat::WrongCat(WrongCat & ref)
 {
 	this->type = ref.getType();
-	std::cout << "A cat was constructed from copy\n";
+	std::cout << "A wrong cat was constructed from copy\n";
 }
 
 WrongCat & WrongCat::operator=(WrongCat const & rhs)
