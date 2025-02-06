@@ -11,15 +11,15 @@ WrongCat::~WrongCat()
 	std::cout << "A wrong cat was destroyed\n";
 }
 
-WrongCat::WrongCat(WrongCat & ref)
+WrongCat::WrongCat(WrongCat& other)
 {
-	this->type = ref.getType();
+	this->type = other.getType();
 	std::cout << "A wrong cat was constructed from copy\n";
 }
 
-WrongCat & WrongCat::operator=(WrongCat const & rhs)
+WrongCat & WrongCat::operator=(const WrongCat& other)
 {
-	this->type = rhs.type;
+	this->type = other.type;
 	return (*this);
 }
 

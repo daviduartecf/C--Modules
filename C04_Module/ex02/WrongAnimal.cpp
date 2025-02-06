@@ -11,15 +11,15 @@ WrongAnimal::~WrongAnimal()
 	std::cout << "Wrong Animal was destroyed\n";
 }
 
-WrongAnimal::WrongAnimal(WrongAnimal & ref)
+WrongAnimal::WrongAnimal(WrongAnimal& other)
 {
-	this->type = ref.type;
+	this->type = other.type;
 	std::cout << "Wrong Animal was constructed from a copy\n";
 }
 
-WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs)
+WrongAnimal & WrongAnimal::operator=(WrongAnimal const& other)
 {
-	this->type = rhs.type;
+	this->type = other.type;
 	return (*this);
 }
 
