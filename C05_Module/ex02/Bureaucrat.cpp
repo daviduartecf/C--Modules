@@ -1,7 +1,12 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-void Bureaucrat::signAForm(AForm& AForm) {
+void	Bureaucrat::executeForm(AForm &form)const
+{
+	form.execute(*this);
+}
+
+void Bureaucrat::signForm(AForm& AForm) {
 	try {
 		AForm.beSigned(*this);
 		std::cout << _name << " signed " << AForm.getName() << std::endl;
@@ -43,11 +48,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other): _name(other._name), _grade(othe
 	std::cout << "Bureaucrat copy constructor was called" << std::endl;
 }
 
-const std::string Bureaucrat::getName(void) {
+const std::string Bureaucrat::getName(void)  const{
 	return _name;
 }
 
-int Bureaucrat::getGrade(void) {
+int Bureaucrat::getGrade(void) const{
 	return _grade;
 }
 

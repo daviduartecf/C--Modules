@@ -8,7 +8,8 @@ class Bureaucrat;
 
 class AForm {
     public:
-        virtual void executeForm(AForm const & form) = 0;
+        virtual void executeAction() const = 0;
+        void execute(Bureaucrat const &executor) const;
         void    beSigned(Bureaucrat& bureaucrat);
         AForm(const std::string& name, int signGrade, int execGrade);
         //Orthodox Canonical AForm
@@ -30,6 +31,11 @@ class AForm {
 			public:
 				const char* what() const throw();
 		};
+        class FormNotSignedException : public std::exception
+        {
+        public:
+            virtual const char *what() const throw();
+        };
     private:
         const std::string _name;
         bool _signed;

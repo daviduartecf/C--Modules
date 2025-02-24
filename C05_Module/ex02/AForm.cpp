@@ -1,6 +1,15 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+void AForm::execute(Bureaucrat const &executor) const {
+    if (!_signed)
+        throw FormNotSignedException();
+    if (executor.getGrade() > _execGrade)
+        throw GradeTooLowException();
+    
+    executeAction();
+}
+
 void    AForm::beSigned(Bureaucrat& bureaucrat) {
     if (bureaucrat.getGrade() <= _signGrade)
         _signed = true;
@@ -74,4 +83,9 @@ const char* AForm::GradeTooHighException::what() const throw() {
 const char* AForm::GradeTooLowException::what() const throw() {
     return "AForm: grade is too low!";
 }
+
+const char* AForm::FormNotSignedException::what(void) const throw()
+{
+	return ("Form needs to be signed");
+};
 
