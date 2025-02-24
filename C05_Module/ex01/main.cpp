@@ -29,7 +29,7 @@ int	main() {
 	}
 
 	try {
-		Bureaucrat noob("noob", 10);
+		Bureaucrat noob("noob", 8);
 		Form form("form", 9, 50);
 		//form.beSigned(noob);
 		noob.signForm(form);
