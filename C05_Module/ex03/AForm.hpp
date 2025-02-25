@@ -34,7 +34,7 @@ class AForm {
         class FormNotSignedException : public std::exception
         {
         public:
-            virtual const char *what() const throw();
+            const char *what() const throw();
         };
     private:
         const std::string _name;

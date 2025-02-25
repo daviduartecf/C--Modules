@@ -91,5 +91,5 @@ const char* AForm::GradeTooLowException::what() const throw() {
 const char* AForm::FormNotSignedException::what(void) const throw()
 {
 	return ("Form needs to be signed");
-};
+}
 

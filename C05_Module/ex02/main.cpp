@@ -16,7 +16,7 @@ int main(void)
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
 		//std::cout << a;
-		std::cout << b->getStatus() << std::endl;
+		std::cout << *b << std::endl;
 
 		try
 		{
@@ -27,7 +27,7 @@ int main(void)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
-		std::cout << b->getStatus() << std::endl;
+		std::cout << *b << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
 		delete a;
@@ -47,7 +47,7 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << c->getStatus();
+		std::cout << *c;
 		std::cout << std::endl;
 
 		// Try to execute before signing
@@ -70,27 +70,26 @@ int main(void)
 			c->beSigned(*a);
 			// a->signForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(AForm::GradeTooLowException &e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 
 		// CEO signs the Form
 		std::cout << std::endl;
-		std::cout << c;
+		std::cout << *c;
 		std::cout << std::endl;
 		try
 		{
 			c->beSigned(*b);
 			// b->signForm(*c);
 		}
-		// catch(AForm::GradeTooLowException &e)
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(AForm::GradeTooLowException &e)
 		{
 			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 		std::cout << std::endl;
-		std::cout << c;
+		std::cout << *c;
 		std::cout << std::endl;
 
 		// try signing the from again
@@ -104,7 +103,7 @@ int main(void)
 			c->execute(*a);
 			// a.executeForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(AForm::GradeTooLowException &e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -139,9 +138,9 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
+		std::cout << a->getName();
+		std::cout << *b;
+		std::cout << *c;
 		b->beSigned(*a);
 		a->signForm(*c);
 		b->execute(*a);
@@ -166,11 +165,13 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
+		std::cout << a->getName() << std::endl;
+		std::cout << *b << std::endl;
+		std::cout << *c << std::endl;
 		b->beSigned(*a);
 		a->signForm(*c);
+		std::cout << *b << std::endl;
+		std::cout << *c << std::endl;
 		for (int i= 0; i < 10; i++)
 			b->execute(*a);
 		// a->executeForm(*c);
