@@ -6,8 +6,9 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
-#include <limits>
+#include <climits>
 #include <cmath>
+#include <cstdio>
 
 class ScalarConverter {
 private:

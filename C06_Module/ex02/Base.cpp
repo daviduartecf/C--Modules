@@ -6,9 +6,8 @@
 #include "C.hpp"
 #include "Base.hpp"
 
-// Function to randomly generate a Base instance
 Base* generate() {
-    int random = rand() % 3; // Generate a random number 0, 1, or 2
+    int random = rand() % 3;
     if (random == 0) {
         return new A();
     } else if (random == 1) {
@@ -18,7 +17,6 @@ Base* generate() {
     }
 }
 
-// Function to identify the type of object pointed by Base pointer
 void identify(Base* p) {
     if (dynamic_cast<A*>(p)) {
         std::cout << "A" << std::endl;
@@ -29,7 +27,6 @@ void identify(Base* p) {
     }
 }
 
-// Function to identify the type of object pointed by Base reference
 void identify(Base& p) {
-    identify(&p); // Call the pointer version
+    identify(&p);
 }

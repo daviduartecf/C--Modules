@@ -1,7 +1,7 @@
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 72, 45), _target(target) {
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 25, 5), _target(target) {
     std::cout << "Presidential Form Created" << std::endl;
 }
 PresidentialPardonForm::~PresidentialPardonForm() {

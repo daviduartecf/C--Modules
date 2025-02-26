@@ -18,7 +18,7 @@ void    AForm::beSigned(Bureaucrat& bureaucrat) {
         std::cout << this->getName() << " was signed by " << bureaucrat.getName() << std::endl;
     }
     else
-    std::cout << this->getName() << " is already signed." << std::endl;
+        std::cout << this->getName() << " is already signed." << std::endl;
 }
 
 AForm::AForm(const std::string& name, int signGrade, int execGrade)

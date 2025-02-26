@@ -9,9 +9,8 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) { (voi
 ScalarConverter::~ScalarConverter() {}
 
 void ScalarConverter::convert(const std::string& literal) {
-    std::cout << std::fixed << std::setprecision(1);
+    std::cout << std::fixed << std::setprecision(4);
 
-    // Handle special floating-point cases
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" ||
         literal == "-inf" || literal == "+inf" || literal == "nan") {
         std::cout << "char: impossible" << std::endl;
@@ -21,7 +20,6 @@ void ScalarConverter::convert(const std::string& literal) {
         return;
     }
 
-    // Convert to char
     if (isChar(literal)) {
         char c = literal[0];
         printChar(c);
@@ -31,9 +29,20 @@ void ScalarConverter::convert(const std::string& literal) {
         return;
     }
 
-    // Convert to int
     if (isInt(literal)) {
-        int n = std::atoi(literal.c_str());
+        long num;
+
+        if (std::sscanf(literal.c_str(), "%ld", &num) != 1) {
+            std::cout << "int: impossible (invalid input)" << std::endl;
+            return;
+        }
+
+        if (num > INT_MAX || num < INT_MIN) {
+            std::cout << "int: impossible (out of int range)" << std::endl;
+            return;
+        }
+
+        int n = static_cast<int>(num);
         printChar(static_cast<char>(n));
         printInt(n);
         printFloat(static_cast<float>(n));
@@ -41,7 +50,6 @@ void ScalarConverter::convert(const std::string& literal) {
         return;
     }
 
-    // Convert to float
     if (isFloat(literal)) {
         float f = std::atof(literal.c_str());
         printChar(static_cast<char>(f));
@@ -51,7 +59,6 @@ void ScalarConverter::convert(const std::string& literal) {
         return;
     }
 
-    // Convert to double
     if (isDouble(literal)) {
         double d = std::strtod(literal.c_str(), NULL);
         printChar(static_cast<char>(d));
@@ -69,8 +76,13 @@ bool ScalarConverter::isChar(const std::string& str) {
 }
 
 bool ScalarConverter::isInt(const std::string& str) {
-    for (size_t i = (str[0] == '-' || str[0] == '+') ? 1 : 0; i < str.size(); i++) {
-        if (!std::isdigit(str[i])) return false;
+    size_t i;
+    if (str[0] == '-' || str[0] == '+')
+        i = 1;
+    else
+        i = 0;
+    for (size_t j = i; j < str.size(); j++) {
+        if (!std::isdigit(str[j])) return false;
     }
     return true;
 }

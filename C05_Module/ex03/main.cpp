@@ -11,7 +11,7 @@ void	sectionTitle(const std::string& title) {
 				<< std::endl << std::endl;
 }
 
-Bureaucrat	burro("burro", 42);
+Bureaucrat	david("david", 2);
 Intern		interno;
 
 void	testMake(const std::string& formName, const std::string& target) {
@@ -20,20 +20,20 @@ void	testMake(const std::string& formName, const std::string& target) {
 	AForm* form = interno.makeForm(formName, target);
 
 	std::cout << *form;
-	burro.signForm(*form);
-	burro.executeForm(*form);
+	david.signForm(*form);
+	david.executeForm(*form);
 
 	delete form;
 }
 
 int	main() {
 	try {
-		testMake("robotomy request", "Bender");
-		testMake("presidential pardon", "lrocca");
-		testMake("shrubbery creation", "home");
+		testMake("robotomy request", "Manuel");
+		testMake("presidential pardon", "daduarte");
+		testMake("shrubbery creation", "here");
 		testMake("not a form", "you");
 	}
 	catch (std::exception& e) {
-		std::cout << "Error: " << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 }

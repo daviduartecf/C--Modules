@@ -2,10 +2,12 @@
 #include "AForm.hpp"
 
 Intern::Intern() {
-
+    std::cout << "Intern default constructor was called" << std::endl;
 }
 
-Intern::~Intern() {}
+Intern::~Intern() {
+    std::cout << "Intern destructor was called" << std::endl;
+}
 
 Intern::Intern(const Intern& other) {
     (void)other;
