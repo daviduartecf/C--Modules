@@ -9,7 +9,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) { (voi
 ScalarConverter::~ScalarConverter() {}
 
 void ScalarConverter::convert(const std::string& literal) {
-    std::cout << std::fixed << std::setprecision(4);
+    std::cout << std::fixed << std::setprecision(1);
 
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" ||
         literal == "-inf" || literal == "+inf" || literal == "nan") {
