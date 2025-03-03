@@ -22,9 +22,9 @@ void    AForm::beSigned(Bureaucrat& bureaucrat) {
 }
 
 AForm::AForm(const std::string& name, int signGrade, int execGrade)
-    : _name(name), 
+    : _name(name),
     _signed(false),
-    _signGrade(signGrade), 
+    _signGrade(signGrade),
     _execGrade(execGrade) {
     if (signGrade < 1 || execGrade < 1)
         throw GradeTooHighException();
@@ -41,10 +41,10 @@ AForm::~AForm() {
     std::cout << "AForm destructor was called!" << std::endl;
 }
 AForm::AForm(const AForm& other)
-    : _name(other._name), 
-    _signed(false), 
+    : _name(other._name),
+    _signed(false),
     _signGrade(other._signGrade),
-    _execGrade(other._signGrade) {
+    _execGrade(other._execGrade) {
     std::cout << "AForm copy constructor was called!" << std::endl;
 }
 AForm& AForm::operator = (const AForm& other) {

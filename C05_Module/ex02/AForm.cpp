@@ -5,14 +5,14 @@ void AForm::execute(Bureaucrat const &executor) const {
     if (!_signed)
         throw FormNotSignedException();
     if (executor.getGrade() > _execGrade)
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     std::cout << executor.getName() << " executed " << this->getName() << std::endl;
     executeAction();
 }
 
 void    AForm::beSigned(Bureaucrat& bureaucrat) {
     if (bureaucrat.getGrade() > _signGrade)
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     else if (_signed == false) {
         _signed = true;
         std::cout << this->getName() << " was signed by " << bureaucrat.getName() << std::endl;
@@ -22,14 +22,14 @@ void    AForm::beSigned(Bureaucrat& bureaucrat) {
 }
 
 AForm::AForm(const std::string& name, int signGrade, int execGrade)
-    : _name(name), 
+    : _name(name),
     _signed(false),
-    _signGrade(signGrade), 
+    _signGrade(signGrade),
     _execGrade(execGrade) {
     if (signGrade < 1 || execGrade < 1)
-        throw GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     if (signGrade > 150 || execGrade > 150)
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     std::cout << "AForm custom constructor was called!" << std::endl;
 }
 
@@ -41,10 +41,10 @@ AForm::~AForm() {
     std::cout << "AForm destructor was called!" << std::endl;
 }
 AForm::AForm(const AForm& other)
-    : _name(other._name), 
-    _signed(false), 
+    : _name(other._name),
+    _signed(false),
     _signGrade(other._signGrade),
-    _execGrade(other._signGrade) {
+    _execGrade(other._execGrade) {
     std::cout << "AForm copy constructor was called!" << std::endl;
 }
 AForm& AForm::operator = (const AForm& other) {

@@ -5,7 +5,6 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(target) {
-    std::srand(std::time(0));
     std::cout << "Robotomy Form Created" << std::endl;
 }
 RobotomyRequestForm::~RobotomyRequestForm() {

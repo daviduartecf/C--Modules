@@ -3,25 +3,27 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include <ctime>
+#include <cstdlib>
 
 int main(void)
 {
+	std::srand(std::time(0));
 	{
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("nabo", 1);
+		Bureaucrat *a = new Bureaucrat("nabo", 149);
 		//AForm *b = new PresidentialPardonForm("default");
 		// AForm *b = new RobotomyRequestForm("default");
 		AForm *b = new ShrubberyCreationForm("default");
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		//std::cout << a;
 		std::cout << *b << std::endl;
 
 		try
 		{
 			b->beSigned(*a);
-			//b->execute(*a);
+			b->execute(*a);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
@@ -42,8 +44,6 @@ int main(void)
 		Bureaucrat *a = new Bureaucrat("Assistant", 145);
 		Bureaucrat *b = new Bureaucrat("CEO", 1);
 		AForm *c = new PresidentialPardonForm("some dude");
-		// AForm *d = new Form(*c);
-		// AForm *d = new Form("Rent Contract", 140, 100); // you are not able to construct an abstract class here
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -55,22 +55,16 @@ int main(void)
 		{
 			c->execute(*b);
 		}
-		catch (AForm::FormNotSignedException &e)
+	    catch (std::exception &e)
 		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		catch (AForm::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << "WHAT THE FLOCK" << e.what() << "\033[0m" << std::endl;
+			std::cerr << "\033[33m" << e.what() << "\033[0m" << std::endl;
 		}
 		std::cout << std::endl;
-		// Assistant signs the Form
 		try
 		{
 			c->beSigned(*a);
-			// a->signForm(*c);
 		}
-		catch(AForm::GradeTooLowException &e)
+		catch(std::exception &e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -82,9 +76,8 @@ int main(void)
 		try
 		{
 			c->beSigned(*b);
-			// b->signForm(*c);
 		}
-		catch(AForm::GradeTooLowException &e)
+		catch(std::exception &e)
 		{
 			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -92,30 +85,25 @@ int main(void)
 		std::cout << *c;
 		std::cout << std::endl;
 
-		// try signing the from again
 		std::cout << std::endl;
 		b->signForm(*c);
 		std::cout << std::endl;
 
-		// execute the Form from assistant
 		try
 		{
 			c->execute(*a);
-			// a.executeForm(*c);
 		}
-		catch(AForm::GradeTooLowException &e)
+		catch(std::exception &e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 		std::cout << std::endl;
 
-		// execute Form from CEO
 		try
 		{
 			c->execute(*b);
-			// b.executeForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception &e)
 		{
 			std::cerr << "\033[33m" << b->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -138,14 +126,19 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a->getName();
+		std::cout << a->getName() << std::endl;
 		std::cout << *b;
 		std::cout << *c;
-		b->beSigned(*a);
-		a->signForm(*c);
-		b->execute(*a);
-		a->executeForm(*c);
-		// c->execute(*a);
+		try {
+			b->beSigned(*a);
+			a->signForm(*c);
+			b->execute(*a);
+			a->executeForm(*c);
+			c->execute(*a);
+		}
+		catch(std::exception &e) {
+			std::cerr << "\033[33m" << e.what() << "\033[0m" << std::endl;
+		}
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
@@ -168,14 +161,20 @@ int main(void)
 		std::cout << a->getName() << std::endl;
 		std::cout << *b << std::endl;
 		std::cout << *c << std::endl;
-		b->beSigned(*a);
-		a->signForm(*c);
-		std::cout << *b << std::endl;
-		std::cout << *c << std::endl;
-		for (int i= 0; i < 10; i++)
-			b->execute(*a);
-		// a->executeForm(*c);
-		c->execute(*a);
+		try {
+			b->beSigned(*a);
+			a->signForm(*c);
+			std::cout << *b << std::endl;
+			std::cout << *c << std::endl;
+			for (int i= 0; i < 10; i++)
+				b->execute(*a);
+			// a->executeForm(*c);
+			c->execute(*a);
+		}
+		catch(std::exception &e) {
+			std::cerr << "\033[33m" << e.what() << "\033[0m" << std::endl;
+		}
+
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;

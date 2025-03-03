@@ -10,10 +10,10 @@ class PresidentialPardonForm: public AForm {
         ~PresidentialPardonForm();
         PresidentialPardonForm(const PresidentialPardonForm& other);
         PresidentialPardonForm& operator = (const PresidentialPardonForm& other);
-        void executeAction() const;   
+        void executeAction() const;
         std::string getTarget() const;
     private:
-        const std::string _target;
+        std::string _target;
 };
 
 #endif

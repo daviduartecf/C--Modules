@@ -4,6 +4,8 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "Intern.hpp"
+#include <cstdlib>
+#include <ctime>
 
 void	sectionTitle(const std::string& title) {
 	std::cout	<< std::endl
@@ -12,12 +14,12 @@ void	sectionTitle(const std::string& title) {
 }
 
 Bureaucrat	david("david", 2);
-Intern		interno;
+Intern		intern;
 
 void	testMake(const std::string& formName, const std::string& target) {
 	sectionTitle(formName);
 
-	AForm* form = interno.makeForm(formName, target);
+	AForm* form = intern.makeForm(formName, target);
 
 	std::cout << *form;
 	david.signForm(*form);
@@ -27,6 +29,7 @@ void	testMake(const std::string& formName, const std::string& target) {
 }
 
 int	main() {
+	std::srand(std::time(0));
 	try {
 		testMake("robotomy request", "Manuel");
 		testMake("presidential pardon", "daduarte");
