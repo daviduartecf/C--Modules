@@ -8,7 +8,9 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
     std::cout << "Shrubbery Form Destroyed" << std::endl;
 }
 ShrubberyCreationForm& ShrubberyCreationForm::operator = (const ShrubberyCreationForm& other) {
-    if (this != &other) {}
+    if (this != &other) {
+		_target = other.getTarget();
+	}
     return *this;
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other): AForm(other) {
@@ -47,8 +49,8 @@ void ShrubberyCreationForm::executeAction() const {
         "`..%@@@o%::;       "  << std::endl <<
         "  `@@@o%::;         "<< std::endl <<
         "    %@@(o)::;      "  << std::endl <<
-        "    .%@@@@%::;     "   << std::endl << 
-        "    ;%@@@@%::;.   "    << std::endl <<   
+        "    .%@@@@%::;     "   << std::endl <<
+        "    ;%@@@@%::;.   "    << std::endl <<
         "    ;%@@@@%%:;;;. "<< std::endl <<
         "...;%@@@@@%%:;;;;,.."<< std::endl <<
         std::endl;

@@ -14,7 +14,7 @@ class ShrubberyCreationForm: public AForm {
         void executeAction() const;
         std::string getTarget() const;
     private:
-        const std::string _target;
+        std::string _target;
 };
 
 #endif

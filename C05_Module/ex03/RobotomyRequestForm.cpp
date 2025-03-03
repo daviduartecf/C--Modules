@@ -11,7 +11,9 @@ RobotomyRequestForm::~RobotomyRequestForm() {
     std::cout << "Robotomy Form Destroyed" << std::endl;
 }
 RobotomyRequestForm& RobotomyRequestForm::operator = (const RobotomyRequestForm& other) {
-    if (this != &other) {}
+    if (this != &other) {
+		_target = other.getTarget();
+	}
     return *this;
 }
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other): AForm() {

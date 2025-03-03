@@ -8,7 +8,9 @@ PresidentialPardonForm::~PresidentialPardonForm() {
     std::cout << "Presidential Form Destroyed" << std::endl;
 }
 PresidentialPardonForm& PresidentialPardonForm::operator = (const PresidentialPardonForm& other) {
-    if (this != &other) {}
+    if (this != &other) {
+		_target = other.getTarget();
+	}
     return *this;
 }
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other): AForm(other) {

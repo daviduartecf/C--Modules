@@ -9,10 +9,10 @@ class RobotomyRequestForm: public AForm {
         ~RobotomyRequestForm();
         RobotomyRequestForm(const RobotomyRequestForm& other);
         RobotomyRequestForm& operator = (const RobotomyRequestForm& other);
-        void executeAction() const;   
+        void executeAction() const;
         std::string getTarget() const;
     private:
-        const std::string _target;
+        std::string _target;
 };
 
 #endif

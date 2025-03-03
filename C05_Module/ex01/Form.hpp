@@ -10,7 +10,6 @@ class Form {
     public:
         void    beSigned(Bureaucrat& bureaucrat);
         Form(const std::string& name, int signGrade, int execGrade);
-        //Orthodox Canonical Form
         Form();
         ~Form();
         Form(const Form& other);
