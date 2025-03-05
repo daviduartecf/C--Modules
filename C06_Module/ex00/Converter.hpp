@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <cstdlib>
 #include <climits>
+#include <sstream>
+#include <cfloat>
 #include <cmath>
 #include <cctype>
 #include <cstdio>

@@ -32,16 +32,14 @@ void ScalarConverter::convert(const std::string& literal) {
     if (isInt(literal)) {
         long num;
 
-        if (std::sscanf(literal.c_str(), "%ld", &num) != 1) {
+		if (std::sscanf(literal.c_str(), "%ld", &num) != 1) {
             std::cout << "int: impossible (invalid input)" << std::endl;
             return;
         }
-
-        if (num > INT_MAX || num < INT_MIN) {
+		if (num > INT_MAX || num < INT_MIN) {
             std::cout << "int: impossible (out of int range)" << std::endl;
             return;
         }
-
         int n = static_cast<int>(num);
         printChar(static_cast<char>(n));
         printInt(n);
@@ -52,8 +50,15 @@ void ScalarConverter::convert(const std::string& literal) {
 
     if (isFloat(literal)) {
         float f = std::atof(literal.c_str());
+		if (f > FLT_MAX || f < FLT_MIN) {
+            std::cout << "float: impossible (out of range)" << std::endl;
+            return;
+        }
         printChar(static_cast<char>(f));
-        printInt(static_cast<int>(f));
+		if (f > static_cast<float>(INT_MAX) || f < static_cast<float>(INT_MIN))
+			std::cout << "int: impossible (out of range)" << std::endl;
+		else
+        	printInt(static_cast<int>(f));
         printFloat(f);
         printDouble(static_cast<double>(f));
         return;
@@ -61,13 +66,19 @@ void ScalarConverter::convert(const std::string& literal) {
 
     if (isDouble(literal)) {
         double d = std::strtod(literal.c_str(), NULL);
+		if (d > DBL_MAX || d < DBL_MIN) {
+            std::cout << "double: impossible (out of range)" << std::endl;
+            return;
+        }
         printChar(static_cast<char>(d));
-        printInt(static_cast<int>(d));
+		if (d > INT_MAX || d < INT_MIN)
+			std::cout << "int: impossible (out of range)" << std::endl;
+		else
+        	printInt(static_cast<int>(d));
         printFloat(static_cast<float>(d));
         printDouble(d);
         return;
     }
-
     std::cout << "Invalid input." << std::endl;
 }
 
@@ -129,13 +140,22 @@ void printChar(char c) {
 }
 
 void printInt(int n) {
-    std::cout << "int: " << n << std::endl;
+	if ((n > INT_MAX || n < INT_MIN))
+		std::cout << "int: impossible (out of range)" << std::endl;
+	else
+    	std::cout << "int: " << n << std::endl;
 }
 
 void printFloat(float f) {
-    std::cout << "float: " << f << "f" << std::endl;
+	if (f > FLT_MAX || f < FLT_MIN)
+		std::cout << "float: impossible (out of range)" << std::endl;
+	else
+    	std::cout << "float: " << f << "f" << std::endl;
 }
 
 void printDouble(double d) {
-    std::cout << "double: " << d << std::endl;
+	if (d > DBL_MAX || d < DBL_MIN)
+		std::cout << "double: impossible (out of range)" << std::endl;
+	else
+    	std::cout << "double: " << d << std::endl;
 }
