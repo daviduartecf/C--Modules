@@ -71,45 +71,71 @@ void ScalarConverter::convert(const std::string& literal) {
     std::cout << "Invalid input." << std::endl;
 }
 
-bool ScalarConverter::isChar(const std::string& str) {
-    return (str.length() == 1 && std::isprint(str[0]) && !std::isdigit(str[0]));
+bool isChar(const std::string& str) {
+	if (str.length() == 1 && std::isprint(str[0]) && !std::isdigit(str[0]))
+    	return true;
+	return false;
 }
 
-bool ScalarConverter::isInt(const std::string& str) {
+
+bool isInt(const std::string& str) {
     size_t i;
     if (str[0] == '-' || str[0] == '+')
         i = 1;
     else
         i = 0;
     for (size_t j = i; j < str.size(); j++) {
-        if (!std::isdigit(str[j])) return false;
+        if (!std::isdigit(str[j]))
+			return false;
     }
     return true;
 }
 
-bool ScalarConverter::isFloat(const std::string& str) {
-    return (str.find('.') != std::string::npos && str[str.size() - 1] == 'f');
+bool isFloat(const std::string& str) {
+	int dot_count = 0;
+	if (str.find('.') != std::string::npos && str[str.size() - 1] == 'f') {
+		for (unsigned int i = 0; i < (str.size() - 1); i++) {
+			if (!isdigit(str[i]) && str[i] != '.') {
+				return false;
+			}
+		}
+		for (unsigned int j = 0; j < str.size(); j++) {
+			if (str[j] == '.')
+				dot_count++;
+		}
+		if (dot_count > 1)
+			return false;
+		return true;
+	}
+	return false;
 }
 
-bool ScalarConverter::isDouble(const std::string& str) {
-    return (str.find('.') != std::string::npos && str[str.size() - 1] != 'f');
+bool isDouble(const std::string& str) {
+	if (str.find('.') != std::string::npos) {
+		for (unsigned int i = 0; i < str.size(); i ++) {
+			if (!isdigit(str[i]) && str[i] != '.')
+				return false;
+		}
+		return true;
+	}
+	return false;
 }
 
-void ScalarConverter::printChar(char c) {
+void printChar(char c) {
     if (std::isprint(c))
         std::cout << "char: '" << c << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
 }
 
-void ScalarConverter::printInt(int n) {
+void printInt(int n) {
     std::cout << "int: " << n << std::endl;
 }
 
-void ScalarConverter::printFloat(float f) {
+void printFloat(float f) {
     std::cout << "float: " << f << "f" << std::endl;
 }
 
-void ScalarConverter::printDouble(double d) {
+void printDouble(double d) {
     std::cout << "double: " << d << std::endl;
 }
