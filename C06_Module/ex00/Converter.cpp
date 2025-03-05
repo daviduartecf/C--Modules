@@ -122,12 +122,16 @@ bool isFloat(const std::string& str) {
 }
 
 bool isDouble(const std::string& str) {
+	int dot_count = 0;
 	if (str.find('.') != std::string::npos) {
 		for (unsigned int i = 0; i < str.size(); i ++) {
 			if (!isdigit(str[i]) && str[i] != '.')
 				return false;
+			if (str[i] == '.')
+				dot_count++;
 		}
-		return true;
+		if (dot_count == 1)
+			return true;
 	}
 	return false;
 }
