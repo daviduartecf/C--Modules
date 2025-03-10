@@ -105,7 +105,12 @@ bool isInt(const std::string& str) {
 bool isFloat(const std::string& str) {
 	int dot_count = 0;
 	if (str.find('.') != std::string::npos && str[str.size() - 1] == 'f') {
-		for (unsigned int i = 0; i < (str.size() - 1); i++) {
+		size_t l;
+		if (str[0] == '-' || str[0] == '+')
+			l = 1;
+		else
+			l = 0;
+		for (unsigned int i = l; i < (str.size() - 1); i++) {
 			if (!isdigit(str[i]) && str[i] != '.') {
 				return false;
 			}
@@ -124,7 +129,12 @@ bool isFloat(const std::string& str) {
 bool isDouble(const std::string& str) {
 	int dot_count = 0;
 	if (str.find('.') != std::string::npos) {
-		for (unsigned int i = 0; i < str.size(); i ++) {
+		size_t l;
+		if (str[0] == '-' || str[0] == '+')
+			l = 1;
+		else
+			l = 0;
+		for (unsigned int i = l; i < str.size(); i ++) {
 			if (!isdigit(str[i]) && str[i] != '.')
 				return false;
 			if (str[i] == '.')
