@@ -50,7 +50,7 @@ void ScalarConverter::convert(const std::string& literal) {
 
     if (isFloat(literal)) {
         float f = std::atof(literal.c_str());
-		if (f > FLT_MAX || f < FLT_MIN) {
+		if (f > FLT_MAX) {
             std::cout << "float: impossible (out of range)" << std::endl;
             return;
         }
@@ -66,7 +66,7 @@ void ScalarConverter::convert(const std::string& literal) {
 
     if (isDouble(literal)) {
         double d = std::strtod(literal.c_str(), NULL);
-		if (d > DBL_MAX || d < DBL_MIN) {
+		if (d > DBL_MAX) {
             std::cout << "double: impossible (out of range)" << std::endl;
             return;
         }
@@ -151,14 +151,14 @@ void printInt(int n) {
 }
 
 void printFloat(float f) {
-	if (f > FLT_MAX || f < FLT_MIN)
+	if (f > FLT_MAX)
 		std::cout << "float: impossible (out of range)" << std::endl;
 	else
     	std::cout << "float: " << f << "f" << std::endl;
 }
 
 void printDouble(double d) {
-	if (d > DBL_MAX || d < DBL_MIN)
+	if (d > DBL_MAX)
 		std::cout << "double: impossible (out of range)" << std::endl;
 	else
     	std::cout << "double: " << d << std::endl;

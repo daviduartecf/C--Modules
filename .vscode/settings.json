@@ -61,6 +61,7 @@
 		"cinttypes": "cpp",
 		"typeinfo": "cpp",
 		"*.tpp": "cpp",
-		"cfloat": "cpp"
+		"cfloat": "cpp",
+		"list": "cpp"
 	}
 }
