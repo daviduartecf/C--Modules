@@ -1,7 +1,7 @@
 #include <iostream>
 
 template<typename T>
-Array<T>::Array(): _array(NULL), _size(0) {}
+Array<T>::Array(): _array(new T[0]), _size(0) {}
 
 template<typename T>
 Array<T>::Array(unsigned int n): _array(new T[n]), _size(n) {}
@@ -33,6 +33,15 @@ T& Array<T>::operator [] (unsigned int index) {
 	else
 		return _array[index];
 }
+
+template <typename T>
+const T& Array<T>::operator [](unsigned int index) const {
+    if (index >= _size) {
+        throw OutOfRange();
+    }
+    return _array[index];
+}
+
 
 template <typename T>
 Array<T>::Array(const Array<T>& other): _size(other._size) {

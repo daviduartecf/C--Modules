@@ -6,7 +6,7 @@ RM			= rm -rf
 
 SRC	= main.cpp
 
-OBJS = $(SRC_FILES:.c=.o)
+OBJS = $(SRC:.cpp=.o)
 
 # ============================================================================ #
 #	COLORS                                                                     #
@@ -26,8 +26,8 @@ CYAN 	= \033[1;36m
 
 all: $(NAME)
 
-$(SRC_DIR)%.o: $(SRC_DIR)%.c
-	${CC} ${CFLAGS} -c $< -o $@
+%.o: %.cpp
+	@${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME): $(OBJS)
 	@ echo "Compilating ${YELLOW}$(NAME) ${CLR_RMV}..."
@@ -41,7 +41,6 @@ clean:
 
 fclean: clean
 	@ $(RM) $(NAME)
-	@${RM} -f ${OBJS}
 
 re: fclean all
 
