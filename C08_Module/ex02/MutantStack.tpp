@@ -39,20 +39,20 @@ typename MutantStack<T>::const_iterator MutantStack<T>::end() const {
 
 template <typename T>
 typename MutantStack<T>::reverse_iterator MutantStack<T>::rbegin() {
-	return (std::stack<T>::c.end());
+	return (std::stack<T>::c.rbegin());
 }
 
 template <typename T>
 typename MutantStack<T>::reverse_iterator MutantStack<T>::rend() {
-	return (std::stack<T>::c.begin());
+	return (std::stack<T>::c.rend());
 }
 
 template <typename T>
 typename MutantStack<T>::const_reverse_iterator MutantStack<T>::rend() const {
-	return (std::stack<T>::c.begin());
+	return (std::stack<T>::c.rend());
 }
 
 template <typename T>
 typename MutantStack<T>::const_reverse_iterator MutantStack<T>::rbegin() const {
-	return (std::stack<T>::c.end());
+	return (std::stack<T>::c.rbegin());
 }
