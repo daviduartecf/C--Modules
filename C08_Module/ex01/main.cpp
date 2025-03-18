@@ -9,7 +9,7 @@ int main() {
 		for (int i = 0; i < 10000; i++) {
 			spano.addNumber(i);
 		}
-        std::cout << "After adding random numbers:" << std::endl;
+        std::cout << "After adding numbers:" << std::endl;
         std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
 	}
@@ -20,7 +20,7 @@ int main() {
 		std::cout << "---------------Test 2---------------" << std::endl;
 		Span spano(7);
 
-		spano.addNumber(2);
+		spano.addNumber(5);
 		spano.addNumber(10);
 		spano.addNumber(20);
 		spano.addNumber(30);
@@ -28,7 +28,7 @@ int main() {
 		spano.addNumber(50);
 		spano.addNumber(100);
 
-        std::cout << "After adding random numbers:" << std::endl;
+        std::cout << "After adding numbers:" << std::endl;
         std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
 	}
@@ -44,9 +44,9 @@ int main() {
        		numbers.push_back(i);
 		}
 		spano.addNumber(numbers.begin(), numbers.end());
+		std::cout << "Added " << numbers.size() << " numbers in one call!" << std::endl;
 
-
-        std::cout << "After adding random numbers:" << std::endl;
+        std::cout << "After adding numbers:" << std::endl;
         std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
 	}
@@ -62,7 +62,7 @@ int main() {
 		spano.addNumber(20);
 		spano.addNumber(30);
 
-        std::cout << "After adding random numbers:" << std::endl;
+        std::cout << "After adding numbers:" << std::endl;
         std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
 	}
@@ -75,7 +75,7 @@ int main() {
 
 		spano.addNumber(2);
 
-        std::cout << "After adding random numbers:" << std::endl;
+        std::cout << "After adding numbers:" << std::endl;
         std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
         std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
 	}

@@ -1,48 +1,36 @@
 NAME	= Container
 
-CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
-RM			= rm -rf
+CC		= c++
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
+RM		= rm -rf
 
-SRC	= main.cpp
+SRC		= main.cpp
+OBJS	= $(SRC:.cpp=.o)
 
-OBJS = $(SRC_FILES:.c=.o)
-
-# ============================================================================ #
-#	COLORS                                                                     #
-# ============================================================================ #
-
+# Colors
 CLR_RMV	= \033[0m
 RED		= \033[1;31m
 GREEN	= \033[1;32m
 R_GREEN	= \033[0;32m
 YELLOW	= \033[1;33m
-BLUE	= \033[1;34m
-CYAN 	= \033[1;36m
-
-# ============================================================================ #
-#	RULES                                                                      #
-# ============================================================================ #
 
 all: $(NAME)
 
-$(SRC_DIR)%.o: $(SRC_DIR)%.c
-	${CC} ${CFLAGS} -c $< -o $@
+%.o: %.cpp
+	@ $(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@ echo "Compilating ${YELLOW}$(NAME) ${CLR_RMV}..."
-	@ $(CC) $(CFLAGS) $(SRC) -o $(NAME)
-	@ echo "${R_GREEN}${GREEN}Container ${R_GREEN} ${GREEN}"
-	@ echo "${R_GREEN}by ${GREEN}daduarte ${R_GREEN} ${GREEN}"
-	@ echo "${CLR_RMV}"
+	@ echo "Compiling ${YELLOW}$(NAME)${CLR_RMV}..."
+	@ $(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@ echo "${R_GREEN}Container compiled successfully!${CLR_RMV}"
 
 clean:
 	@ $(RM) $(OBJS)
 
 fclean: clean
 	@ $(RM) $(NAME)
-	@${RM} -f ${OBJS}
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
