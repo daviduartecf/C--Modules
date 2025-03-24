@@ -24,9 +24,7 @@ int Span::shortestSpan(void) {
 
 	int minSpan = std::numeric_limits<int>::max();
 	for (unsigned int i = 1; i < sortedVec.size(); i ++) {
-		int span = sortedVec[i] - sortedVec[i - 1];
-		if (span < minSpan)
-			minSpan = span;
+		minSpan = std::min(minSpan, sortedVec[i] - sortedVec[i - 1]);
 	}
 	return minSpan;
 }
@@ -49,7 +47,7 @@ void Span::addNumber(int num) {
 
 Span::Span(): size(0) {}
 
-Span::Span(unsigned int N): size(N) {
+Span::Span(int N): size(N) {
 	vec.reserve(N);
 }
 

@@ -8,7 +8,7 @@ class Span {
 	public:
 		//orthodox canonical form
 		Span();
-		Span(unsigned int N);
+		Span(int N);
 		~Span();
 		Span& operator = (const Span& other);
 		Span(const Span& other);

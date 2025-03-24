@@ -82,4 +82,17 @@ int main() {
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
+	try {
+		std::cout << "---------------Test 6---------------" << std::endl;
+		Span spano(-10);
+
+		spano.addNumber(2);
+
+        std::cout << "After adding numbers:" << std::endl;
+        std::cout << "Shortest Span: " << spano.shortestSpan() << std::endl;
+        std::cout << "Longest Span: " << spano.longestSpan() << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }
