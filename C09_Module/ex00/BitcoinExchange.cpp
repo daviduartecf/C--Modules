@@ -36,8 +36,8 @@ void BitcoinExchange::readDatabase() {
 }
 
 void BitcoinExchange::checkDate(std::string date) {
+	std::string msg= "bad input => ";
 	if (date.find('-') == std::string::npos) {
-		std::string msg = "bad input => ";
 		std::string finalMsg = msg += date;
 		throw InputException(finalMsg);
 	}
@@ -49,19 +49,30 @@ void BitcoinExchange::checkDate(std::string date) {
 	int year, month, day;
 	year = atoi(yearS.c_str());
 	if (year < 0 || year > INT_MAX) {
-		std::string msg = "bad input => ";
 		std::string finalMsg = msg += date;
 		throw InputException(finalMsg);
 	}
 	month = atoi(monthS.c_str());
 	if (month < 0 || month > 12) {
-		std::string msg = "bad input => ";
 		std::string finalMsg = msg += date;
 		throw InputException(finalMsg);
 	}
 	day = atoi(dayS.c_str());
+	if (month == 2) {
+		if (year % 4 == 0) {
+			if (day > 29 || day < 0) {
+				std::string finalMsg = msg += date;
+				throw InputException(finalMsg);
+			}
+		}
+		else if (year % 4 != 0) {
+			if (day > 28 || day < 0) {
+				std::string finalMsg = msg += date;
+				throw InputException(finalMsg);
+			}
+		}
+	}
 	if (day < 0 || day > 31) {
-		std::string msg = "bad input => ";
 		std::string finalMsg = msg += date;
 		throw InputException(finalMsg);
 	}
