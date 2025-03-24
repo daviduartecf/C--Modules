@@ -62,6 +62,7 @@
 		"typeinfo": "cpp",
 		"*.tpp": "cpp",
 		"cfloat": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"stack": "cpp"
 	}
 }

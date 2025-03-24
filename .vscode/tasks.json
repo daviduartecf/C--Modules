@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Generate C++ Class",
+            "type": "shell",
+            "command": "python",
+            "args": ["create_class.py", "${input:className}"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "className",
+            "type": "promptString",
+            "description": "Enter the class name"
+        }
+    ]
+}
