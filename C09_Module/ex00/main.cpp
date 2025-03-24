@@ -9,11 +9,14 @@ int main(int argc, char *argv[]) {
 	}
 	try {
 		btc.readDatabase();
+		//btc.printDB();
 		btc.processInput(argv[1]);
 	}
 	catch (BitcoinExchange::DatabaseException& e) {
 		std::cout << e.what() << std::endl;
 	}
-	//btc.printDB();
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 	return 0;
 }

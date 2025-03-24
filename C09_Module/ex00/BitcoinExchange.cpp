@@ -77,43 +77,28 @@ void BitcoinExchange::processInput(std::string inputFile) {
 		std::cerr << "Couldn't open database" << std::endl;
 		exit(1);
 	}
-	if (inputFile.find(".txt") != std::string::npos) {
-		std::string header;
-		std::getline(file, header);
-		if (header != "date | value")
-			//throw InputException("wrong format file");
-			std::cout << "wrong" <<std::endl;
-		std::string line, date;
-		float value;
-		float total;
-		while (std::getline(file, line)) {
-			std::stringstream ss(line);
-			std::getline(ss, date, '|');
-			try {
-				checkDate(date);
-				ss >> value;
-				if (value < 0)
-					throw InputException("not a positive number.");
-				else if (value > 1000)
-					throw InputException("too large a number.");
-				total = calculateTotal(value, date);
-				std::cout << date << " => " << value << " = " << total << std::endl;
-			}
-			catch (BitcoinExchange::InputException& e) {
-				std::cout << e.what() << std::endl;
-			}
+	std::string header;
+	std::getline(file, header);
+	std::string line, date;
+	float value;
+	float total;
+	while (std::getline(file, line)) {
+		std::stringstream ss(line);
+		std::getline(ss, date, '|');
+		try {
+			checkDate(date);
+			ss >> value;
+			if (value < 0)
+				throw InputException("not a positive number.");
+			else if (value > 1000)
+				throw InputException("too large a number.");
+			total = calculateTotal(value, date);
+			std::cout << date << " => " << value << " = " << total << std::endl;
+		}
+		catch (BitcoinExchange::InputException& e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
-
-	if (inputFile.find(".csv") != std::string::npos) {
-		//processCsv(inputFile);
-		std::string header;
-		std::getline(file, header);
-		if (header != "date,value")
-			//throw InputException("wrong format file");
-			std::cout << "wrong" <<std::endl;
-	}
-
 }
 
 float	BitcoinExchange::calculateTotal(float value, std::string date) {
@@ -131,8 +116,10 @@ std::string BitcoinExchange::getClosestDate(std::string date) {
 		return it->first;
 	if (it == database.end()) {
 		if (database.empty()) //if no greater/equal date exists (can't use --it)
-			throw InputException("empty database");
+			throw InputException("empty database.");
 	}
+	if (it == database.begin())
+		throw InputException("invalid date (bitcoin not existent)");
 	--it;
 	return it->first;
 }
