@@ -13,7 +13,7 @@ class RPN {
     public:
 		//ORTHODOX CANONICAL FORM
         RPN(); //posso deixar este?
-        virtual ~RPN();
+        ~RPN();
         RPN(const RPN& other);
         RPN& operator = (const RPN& other);
 		RPN(std::string input);
