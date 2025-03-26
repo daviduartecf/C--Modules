@@ -5,5 +5,10 @@ int main(int argc, char * argv[]) {
 		std::cerr << "Wrong usage!" << std::endl;
 		return 1;
 	}
-	RPN rpn(argv[1]);
+	try {
+		RPN rpn(argv[1]);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }
