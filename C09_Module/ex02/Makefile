@@ -4,7 +4,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -rf
 
-SRC		= main.cpp RPN.cpp
+SRC		= main.cpp PmergeMe.cpp
 OBJS	= $(SRC:.cpp=.o)
 
 # Colors

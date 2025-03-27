@@ -6,7 +6,10 @@
 #include <deque>
 #include <vector>
 #include <climits>
-#include <string>
+#include <cstdlib>
+#include <sstream>
+#include <cmath>
+#include <ctime>
 
 class PmergeMe {
     public:
@@ -18,6 +21,16 @@ class PmergeMe {
         PmergeMe& operator = (const PmergeMe& other);
 		//METHODS
 		bool isValidNumber(std::string token);
+		template <typename T>
+		void printContainer(const T& container);
+		int Jacobsthal(int k);
+		void mergeSortDeque(void);
+		void mergeSortList(void);
+		std::vector<int> generateJacobsthalNumbers(int limit);
+		class MyException: public std::exception {
+			public:
+				const char* what() const throw();
+		};
     private:
         std::deque<int> myDeque;
 		std::vector<int> myVector;
