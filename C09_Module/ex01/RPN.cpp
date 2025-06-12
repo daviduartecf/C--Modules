@@ -16,8 +16,8 @@ RPN::RPN(const RPN& other) {
     this->myStack = other.myStack;
 }
 
-long RPN::doOp(long num1, long num2, std::string operat) {
-	long result = 0;
+float RPN::doOp(float num1, float num2, std::string operat) {
+	float result = 0;
 	if (operat == "+") {
 		result = num1 + num2;
 	}
@@ -35,7 +35,7 @@ long RPN::doOp(long num1, long num2, std::string operat) {
 
 bool RPN::isNumber(const std::string token) {
 	char* end;
-    long value = std::strtol(token.c_str(), &end, 10);
+    float value = std::strtol(token.c_str(), &end, 10);
 
 	if (*end != '\0')
 		return false;
@@ -75,9 +75,9 @@ void RPN::validateOrder(std::stack<std::string>& newStack) {
 		throw WrongOrder();
 }
 
-long RPN::firstOp(std::stack<std::string>& newStack) {
-	long result;
-	long num1, num2;
+float RPN::firstOp(std::stack<std::string>& newStack) {
+	float result;
+	float num1, num2;
 	char *end;
 	std::string operat;
 
@@ -106,8 +106,8 @@ RPN::RPN(std::string input) {
 	//validate order of stack and populate new stack in correct order
  	validateOrder(newStack);
 
-	long result;
-	long num;
+	float result;
+	float num;
 	char *end;
 	result = 0;
 	std::string operat;
@@ -120,8 +120,8 @@ RPN::RPN(std::string input) {
 		newStack.pop();
 		result = doOp(result, num, operat);
 	}
-	if (result > INT_MAX || result < INT_MIN)
-		throw WrongOrder();
+	//if (result > INT_MAX || result < INT_MIN)
+	//	throw WrongOrder();
 	std::cout << result << std::endl;
 }
 
