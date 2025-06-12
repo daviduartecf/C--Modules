@@ -36,8 +36,8 @@ PmergeMe::PmergeMe(char *input[], int argc) {
 	std::cout << "After: ";
 	printContainer(myVector);
 }
-
-void insertPairs(std::vector<std::pair<int, int> >&pairs, std::pair<int, int>temp, int index) {
+template <typename T>
+void insertPairs(T& pairs, std::pair<int, int>temp, int index) {
 	//Base case (insert at beggining)
 	if (index < 0)
 		pairs.insert(pairs.begin(), temp);
@@ -53,7 +53,8 @@ void insertPairs(std::vector<std::pair<int, int> >&pairs, std::pair<int, int>tem
 //Recursively sort pairs
 //      pairs = { {10, 1}, {7, 2}, {5, 3}, {8, 9} }  -> >> > 8,9 out of order
 //		pairs = { {10, 1}, {8, 9}, {7, 2}, {5, 3} }
-void sortVectorPairs(std::vector<std::pair<int, int> >&pairs, int index) {
+template <typename T>
+void sortVectorPairs(T& pairs, int index) {
 	std::pair<int, int> temp = pairs[index];
 	//Base case
 	if (index < 1)
@@ -90,8 +91,8 @@ std::vector<int> JacobSequence(int size) {
 	}
 	return result;
 }
-
-void PmergeMe::sortVector(std::vector<int>& vec) {
+template <typename T>
+void PmergeMe::sortVector(T& vec) {
     int lastNumber = -1;
 	struct timeval start, end;
     gettimeofday(&start, NULL);
@@ -149,6 +150,7 @@ void PmergeMe::sortVector(std::vector<int>& vec) {
     std::cout << "Time to process a range of " << vec.size()
               << " elements with std::vector: " << elapsed << " us" << std::endl;
 }
+
 
 
 bool PmergeMe::isValidNumber(std::string token) {

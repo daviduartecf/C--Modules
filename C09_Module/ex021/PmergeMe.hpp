@@ -11,7 +11,7 @@
 #include <cmath>
 #include <sys/time.h>
 #include <ctime>
-#include <algorithm> 
+#include <algorithm>
 
 class PmergeMe {
     public:
@@ -28,10 +28,8 @@ class PmergeMe {
 		int Jacobsthal(int k);
 		void mergeSortDeque(void);
 		void mergeSortList(void);
-		std::vector<size_t> generateJacobsthalNumbers(size_t n);
-		void binaryInsert(std::vector<int>& sorted, int value, size_t maxIndex);
-		void mergeInsertionSortVector(std::vector<int>& sequence);
-		void sortVector(std::vector<int>& vec);
+		template <typename T>
+		void sortVector(T& vec);
 		class MyException: public std::exception {
 			public:
 				const char* what() const throw();
