@@ -30,11 +30,18 @@ PmergeMe::PmergeMe(char *input[], int argc) {
 		originalNumbers.push_back(num);
 		size ++;
 	}
+	std::cout << "Vector --------------" << std::endl;
 	std::cout << "Before: ";
 	printContainer(myVector);
 	sortVector(myVector);
 	std::cout << "After: ";
 	printContainer(myVector);
+	std::cout << "Deque --------------" << std::endl;
+	std::cout << "Before: ";
+	printContainer(myDeque);
+	sortDeque();
+	std::cout << "After: ";
+	printContainer(myDeque);
 }
 template <typename T>
 void insertPairs(T& pairs, std::pair<int, int>temp, int index) {
@@ -135,7 +142,7 @@ void PmergeMe::sortVector(T& vec) {
 	std::vector<int> JacobSeq = JacobSequence(secondSeq.size());
 	for (size_t i = 0; i < JacobSeq.size(); i++) {
 		size_t secondIndex = JacobSeq[i] - 1;
-		if (secondIndex >= 0 && secondIndex < secondSeq.size()) {
+		if (secondIndex > 0 && secondIndex < secondSeq.size()) {
 			int insertNumber = secondSeq[secondIndex];
 			//Get the insert position of the number using upper_bound
 			std::vector<int>::iterator it = std::upper_bound(main.begin(), main.end(), insertNumber);
@@ -151,7 +158,76 @@ void PmergeMe::sortVector(T& vec) {
               << " elements with std::vector: " << elapsed << " us" << std::endl;
 }
 
+void PmergeMe::sortDeque() {
+    int lastNumber = -1;
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
 
+    // Check if the size is odd and keep the last number if it is
+    bool isOdd = (size % 2 != 0);
+    
+    if (isOdd) {
+        lastNumber = myDeque.back();
+        myDeque.pop_back();
+    }
+    
+    // Create pairs (using vector for pairs to maintain consistency with sortVectorPairs)
+    std::vector<std::pair<int, int> > myPairs;
+    for (std::deque<int>::iterator it = myDeque.begin(); it != myDeque.end(); it += 2)
+        myPairs.push_back(std::make_pair(*it, *(it + 1)));
+
+    // Sort each pair (larger first)
+    for (std::vector<std::pair<int, int> >::iterator itpair = myPairs.begin(); itpair != myPairs.end(); itpair++) {
+        if (itpair->first < itpair->second)
+            std::swap(itpair->first, itpair->second);
+    }
+    
+    // Sort all pairs by their larger elements
+    if (myPairs.size() > 1)
+        sortVectorPairs(myPairs, myPairs.size() - 1);
+
+    // Create 2 sequences -> main and secondSeq
+    std::deque<int> main;
+    std::deque<int> secondSeq;
+    
+    // Add first smaller element to main
+    if (!myPairs.empty())
+        main.push_back(myPairs[0].second);
+    
+    // Add all larger elements to main
+    for (size_t i = 0; i < myPairs.size(); i++)
+        main.push_back(myPairs[i].first);
+    
+    // Add remaining smaller elements to secondSeq
+    for (size_t j = 1; j < myPairs.size(); j++)
+        secondSeq.push_back(myPairs[j].second);
+    
+    // Add odd element if exists
+    if (isOdd)
+        secondSeq.push_back(lastNumber);
+
+    // Insert using Jacobsthal sequence (binary search)
+    if (!secondSeq.empty()) {
+        std::vector<int> JacobSeq = JacobSequence(secondSeq.size());
+        for (size_t i = 0; i < JacobSeq.size(); i++) {
+            size_t secondIndex = JacobSeq[i] - 1;
+            if (secondIndex < secondSeq.size()) {
+                int insertNumber = secondSeq[secondIndex];
+                // Get the insert position using upper_bound
+                std::deque<int>::iterator it = std::upper_bound(main.begin(), main.end(), insertNumber);
+                main.insert(it, insertNumber);
+            }
+        }
+    }
+    
+    myDeque = main;
+    gettimeofday(&end, NULL);
+
+    double elapsed = (end.tv_sec - start.tv_sec) * 1000000.0;
+    elapsed += (end.tv_usec - start.tv_usec);
+    std::cout << "Time to process a range of " << size
+              << " elements with std::deque: " << elapsed << " us" << std::endl;
+}
 
 bool PmergeMe::isValidNumber(std::string token) {
 	long long num;

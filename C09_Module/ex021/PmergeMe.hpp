@@ -30,6 +30,7 @@ class PmergeMe {
 		void mergeSortList(void);
 		template <typename T>
 		void sortVector(T& vec);
+		void sortDeque();
 		class MyException: public std::exception {
 			public:
 				const char* what() const throw();
