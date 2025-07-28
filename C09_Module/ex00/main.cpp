@@ -4,7 +4,7 @@ int main(int argc, char *argv[]) {
 	BitcoinExchange btc;
 
 	if (argc != 2) {
-		std::cerr << "Wrong usage! (./btc input.txt)" << std::endl;
+		std::cerr << "Error: could not open file." << std::endl;
 		return 0;
 	}
 	try {
@@ -13,10 +13,10 @@ int main(int argc, char *argv[]) {
 		btc.processInput(argv[1]);
 	}
 	catch (BitcoinExchange::DatabaseException& e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	return 0;
 }

@@ -26,8 +26,10 @@ class BitcoinExchange
 		void printDB();
 		void checkInput(std::string inputFile);
 		void processInput(std::string inputFile);
+		bool isValidFloat(const std::string& str);
 		float calculateTotal(float value, std::string date);
 		std::string getClosestDate(std::string date);
+		bool valueTooHigh(const std::string& valueS);
 		class InputException: public std::exception {
 			public:
 				explicit InputException(std::string message);

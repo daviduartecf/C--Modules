@@ -2,129 +2,76 @@
 
 RPN::RPN() {}
 
-RPN::~RPN() {}
+RPN::RPN(const RPN& other) : _stack(other._stack) {}
 
-RPN& RPN::operator = (const RPN& other) {
-    if (this != &other)
-    {
-        this->myStack = other.myStack;
+RPN& RPN::operator=(const RPN& other) {
+    if (this != &other) {
+        _stack = other._stack;
     }
     return *this;
 }
 
-RPN::RPN(const RPN& other) {
-    this->myStack = other.myStack;
+RPN::~RPN() {}
+
+bool RPN::isOperator(const std::string& token) {
+    return token == "+" || token == "-" || token == "*" || token == "/";
 }
 
-float RPN::doOp(float num1, float num2, std::string operat) {
-	float result = 0;
-	if (operat == "+") {
-		result = num1 + num2;
-	}
-	else if (operat == "-") {
-		result = num1 - num2;
-	}
-	else if (operat == "*") {
-		result = num2 * num1;
-	}
-	else if (operat == "/") {
-		result = num1 / num2;
-	}
-	return result;
+bool RPN::isValidNumber(const std::string& token) {
+    if (token.length() != 1)
+        return false;
+    return token[0] >= '0' && token[0] <= '9';
 }
 
-bool RPN::isNumber(const std::string token) {
-	char* end;
-    float value = std::strtol(token.c_str(), &end, 10);
-
-	if (*end != '\0')
-		return false;
-	if (value > 9 || value < INT_MIN)
-		return false;
-	return true;
+double RPN::performOperation(double a, double b, const std::string& op) {
+    if (op == "+")
+        return a + b;
+    else if (op == "-")
+        return a - b;
+    else if (op == "*")
+        return a * b;
+    else if (op == "/") {
+        if (b == 0)
+            throw std::runtime_error("Error");
+        return a / b;
+    }
+    throw std::runtime_error("Error");
 }
 
-bool RPN::isOperator(const std::string token) {
-	if (token.length() == 1 && (token == "-" || token == "+" || token == "*" || token == "/"))
-		return true;
-	return false;
-}
-
-void RPN::validateOrder(std::stack<std::string>& newStack) {
-	bool expectOperator = true;
-	int numberCount = 0, operatorCount = 0;
-	while (!myStack.empty()) {
-		if (isNumber(myStack.top())) {
-			if (myStack.size() == 1)
-				expectOperator = false;
-			if (expectOperator)
-				throw WrongOrder();
-			numberCount ++;
-			expectOperator = true;
-		}
-		else if (isOperator(myStack.top())) {
-			if (!expectOperator)
-				throw WrongOrder();
-			operatorCount ++;
-			expectOperator = false;
-		}
-		newStack.push(myStack.top());
-		myStack.pop();
-	}
-	if (!(numberCount >= 2 && operatorCount >= 1))
-		throw WrongOrder();
-}
-
-float RPN::firstOp(std::stack<std::string>& newStack) {
-	float result;
-	float num1, num2;
-	char *end;
-	std::string operat;
-
-	num1 = std::strtol(newStack.top().c_str(), &end, 10);
-	newStack.pop();
-	num2 = std::strtol(newStack.top().c_str(), &end, 10);
-	newStack.pop();
-	operat = newStack.top();
-	newStack.pop();
-	result = doOp(num1, num2, operat);
-
-	return result;
-}
-
-RPN::RPN(std::string input) {
-	std::stack<std::string> newStack;
-	std::stringstream ss(input);
-	std::string token;
-
-	while (ss >> token) {
-		if (!isOperator(token) && !isNumber(token))
-			throw WrongOrder();
-		myStack.push(token);
+double RPN::calculate(const std::string& arg) {
+    while (!_stack.empty()) {
+        _stack.pop();
 	}
 
-	//validate order of stack and populate new stack in correct order
- 	validateOrder(newStack);
+    std::istringstream iss(arg);
+    std::string token;
 
-	float result;
-	float num;
-	char *end;
-	result = 0;
-	std::string operat;
-	//first op
-	result = firstOp(newStack);
-	while (!newStack.empty()) {
-		num = std::strtol(newStack.top().c_str(), &end, 10);
-		newStack.pop();
-		operat = newStack.top();
-		newStack.pop();
-		result = doOp(result, num, operat);
-	}
-	//if (result > INT_MAX || result < INT_MIN)
-	//	throw WrongOrder();
-	std::cout << result << std::endl;
-}
+    while (iss >> token) {
+        if (isValidNumber(token)) {
+            // push num to stack
+            _stack.push(token[0] - '0');
+        }
+        else if (isOperator(token)) {
+            if (_stack.size() < 2)
+                throw std::runtime_error("Error");
 
-const char* RPN::WrongOrder::what() const throw() {
-	return "Error";
+            // Save values and pop from stack
+            double b = _stack.top();
+			_stack.pop();
+            double a = _stack.top();
+			_stack.pop();
+
+            // Operation
+            double result = performOperation(a, b, token);
+            _stack.push(result);
+        }
+        else {
+            throw std::runtime_error("Error");
+        }
+    }
+
+    if (_stack.size() != 1)
+        throw std::runtime_error("Error");
+
+    return _stack.top();
 }
